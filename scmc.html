@@ -3180,12 +3180,22 @@ background: white !important;
 </article></slide><slide class=""><hgroup><h2>Uopštenje</h2></hgroup><article  id="uopstenje">
 
 <ul class = 'build'>
-<li><p>Da bismo smanjili problem nestabilnosti na krajevima intervala, možda bi pomoglo da nekako razvučemo funkciju na veći domen, npr. celo \(\mathbb{R}\), da bi polinom manje morao da se adaptira ekstremnim vrednostima.</p></li>
-<li><p>Uvedimo novu slučajnu promenljivu \(X\). Tada je \(F_X(X) \sim U[0,1]\), pa je zato i \[F_Y^{-1}(F_X(X)) \stackrel{d}{=} Y.\]</p></li>
-<li><p>Uzorak iz \(Y\) generišemo sa \[y_i = F_Y^{-1}(F_X(\xi_i)),\] gde je \(\xi_1,\dots,\xi_n\) uzorak iz raspodele \(F_X\).</p></li>
+<li><p>Da bismo smanjili problem nestabilnosti na krajevima intervala, možda bi pomoglo da nekako razvučemo funkciju \(F_Y^{-1}(u)\) na veći domen, npr. celo \(\mathbb{R}\), da bi polinom manje morao da se adaptira ekstremnim vrednostima.</p></li>
+<li><p>To možemo da postignemo nekom smenom oblika \(u=h(x)\), gde je \(h:\mathbb{R}\to[0,1]\).</p></li>
+<li><p>Sada interpoliramo funkciju \(g(x) = F_Y^{-1}(h(x)) :\mathbb{R}\to\mathbb{R}\).</p></li>
+<li><p>Problem: Kako biramo smenu \(h\)?</p></li>
+<li><p>Da bismo koristili \(g(x)\) za generisanje slučajnih veličina, \(h(x)\) mora da ima \(U[0,1]\) raspodelu.</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Uopštenje</h2></hgroup><article  id="uopstenje-1">
+
+<ul class = 'build'>
+<li><p>Rešenje: Prirodno je da \(h(x)\) bude funkcija raspodele neke nove slučajne veličine \(X\), odakle je \(h(X)=F_X(X) \sim U[0,1].\)</p></li>
+<li><p>Zato je i \[F_Y^{-1}(F_X(X)) \stackrel{d}{=} Y.\]</p></li>
+<li><p>Uzorak iz \(Y\) generišemo sa \[y_i = F_Y^{-1}(F_X(\xi_i)),\] gde je \(\xi_1,\dots,\xi_n\) uzorak iz raspodele \(F_X\).</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Uopštenje</h2></hgroup><article  id="uopstenje-2">
 
 <ul class = 'build'>
 <li><p>Sada nećemo da interpoliramo funkciju \(F_Y^{-1}\), već \(F_Y^{-1}\circ F_X : \mathbb{R} \to \mathbb{R}\), pa dobijamo polinom \[g(x) := F_Y^{-1}(F_X(x)) \approx \sum_{i=1}^NF_Y^{-1}(F_X(x_i))l_i(x) =: g_N(x),\] gde su opet \(l_i(x) = \prod\limits_{j=1, j\neq i}^N\frac{x-x_j}{x_i-x_j}\), a \(x_i\) čvorne tačke.</p></li>
@@ -3283,7 +3293,7 @@ ks.test(pol_norm(rnorm(1e5)), rlogis(1e5))</pre>
 
 <p>Za dovoljno glatke \(\Psi\), greška teži nuli, kad \(N\to\infty\).</p>
 
-</article></slide><slide class=""><hgroup><h2>Par brzih primera</h2></hgroup><article  id="par-brzih-primera">
+</article></slide><slide class=""><hgroup><h2>Por brzih primera</h2></hgroup><article  id="por-brzih-primera">
 
 <ul class = 'build'>
 <li><p>Pokrenućemo u nastavku još nekoliko primera generisanja slučajnih veličina pomoću SCMC metode.</p></li>
@@ -3363,7 +3373,7 @@ microbenchmark(rnorm = rnorm(1e5), scmc = scmc_t(1e5),
 </article></slide><slide class=""><hgroup><h2>Višedimenziona interpolacija</h2></hgroup><article  id="visedimenziona-interpolacija">
 
 <ul class = 'build'>
-<li><p>Primetimo da, ako bismo interpolirali \(F_{Z|Y=y_i}^{-1}(\Phi(\xi_i))\), morali bismo da konstruišemo zaseban polinom za svako \(y_i\), što je potpuno neupotrebljivom.</p></li>
+<li><p>Primetimo da, ako bismo interpolirali \(F_{Z|Y=y_i}^{-1}(\Phi(\xi_i))\), morali bismo da konstruišemo zaseban polinom za svako \(y_i\), što je potpuno neupotrebljivo.</p></li>
 <li><p>To možemo da izbegnemo koristeći dvodimenzionu Lagranževu interpolaciju.</p></li>
 <li><p>Posmatramo funkciju \(g(x, y) := F_{Z|Y=y}^{-1}(\Phi(x))\), i nju interpoliramo:</p></li>
 <li><p>\[g(x, y) \approx \sum_{i=1}^{N_X}\sum_{j=1}^{N_Y}F_{Z|Y=y_j}^{-1}(\Phi(x_i))l_Y^{(j)}(y)l_X^{(i)}(x) =: g_N(x,y),\] gde su \(l_X^{(i)}(x)=\prod\limits_{j=1, j\neq i}^{N_X}\frac{x-x_j}{x_i-x_j}\) i \(l_Y^{(j)}(y)=\prod\limits_{i=1, j\neq i}^{N_Y}\frac{y-y_i}{y_j-y_i}\), a \(y_1,\dots, y_{N_Y}\) čvorne tačke za interpolaciju za promenljivu \(y\).</p></li>
@@ -3375,7 +3385,7 @@ microbenchmark(rnorm = rnorm(1e5), scmc = scmc_t(1e5),
 <li>Ovime smo pokrili ceo domen \((x,y)\) dvodimenzionim polinomom, pa \(Z\) sada generišemo na isti način kako smo i zamislili, samo što umesto \(F_{Z|Y=y_i}^{-1}(\Phi(\xi_i))\) koristimo aproksimaciju koju smo naveli, pa dobijamo \[z_i = g_N(\xi_i, y_i) \approx F_{Z|Y=y_i}^{-1}(\Phi(\xi_i)).\]</li>
 <li><p>Generisanje se sada svodi na generisanje \(\xi_i\), \(y_i\) i evaluaciju dvodimenzionog polinoma \(g_n(x,y)\), što se sve radi vrlo brzo.</p></li>
 <li><p>Optimalne tačke za \(Y\) možemo računati na osnovu uzoračkih momenata generisanog uzorka \(y_i\), dok za \(X\) koristimo isti metod kao i za jednodimenzione raspodele.</p></li>
-<li><p>Ovaj postupak se može lako uopštiti na veličine \(Z|X_1,\dots,X_d\), gde samo koristimo d-dimenzioni polinom.</p></li>
+<li><p>Ovaj postupak se može lako uopštiti na veličine \(Z|X_1,\dots,X_d\), gde samo koristimo \((d+1)\)-dimenzioni polinom.</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Višedimenzione raspodele</h2></hgroup><article  id="visedimenzione-raspodele">
