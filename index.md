@@ -5,3 +5,4 @@ Lista projekata koji imaju svoju stranicu:
 * [Praktican uvod u Shiny](https://blaza.github.io/shinyintro/)
 * [Testovi simetrije](https://blaza.github.io/symmetry/)
 * [Stochastic Collocation Monte Carlo](https://blaza.github.io/scmc/)
+* [Kurs Statistički softver 2](https://blaza.github.io/ss2/)
